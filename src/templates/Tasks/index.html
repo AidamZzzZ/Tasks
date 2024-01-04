@@ -1,0 +1,29 @@
+<h1>Tareas</h1>
+<a href="{% url "create" %}">Crear Tarea</a>
+<hr>
+
+{% for task in tasks %}
+<div>
+    <li>
+    {% if task.complete == True %}
+    <strike>{{ task.title }}</strike> ☑️
+    <div>
+        <a href="{% url "update" task.id %}">Actualizar</a>
+    </div>
+    <div>
+        <a href="{% url "delete" task.id %}">Eliminar</a>
+    </div>
+        {% else %}
+    <a href="{% url "detail" task.id %}">{{ task.title }}</a> ⌚
+    <div>
+        <a href="{% url "update" task.id %}">Actualizar</a>
+    </div>
+    <div>
+        <a href="{% url "delete" task.id %}">Eliminar</a>
+    </div>
+    {% endif %}
+        <p class="due-date">Fecha: {{ task.due_date }}</p>
+        <p class="priority">Prioridad: {{ task.priority }}</p>
+    </li>
+</div>
+{% endfor %}
